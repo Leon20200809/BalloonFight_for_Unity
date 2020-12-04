@@ -14,8 +14,10 @@ public class RandomObjectGenerator : MonoBehaviour
     public Vector2 waitTimeRange;
 
     float waitTime;
-    float timer;               
+    float timer;
 
+    bool isActivate;
+    GameDirector gameDirector;
 
     void Start()
     {
@@ -33,6 +35,9 @@ public class RandomObjectGenerator : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(isActivate);
+        if (!isActivate) return;
+        
         // 計測用タイマーを加算
         timer += Time.deltaTime;
 
@@ -68,4 +73,15 @@ public class RandomObjectGenerator : MonoBehaviour
         // 次の生成までの時間をセットする
         SetGenerateTime();
     }
+
+
+    /// <summary>
+    /// 生成状態のオン/オフを切り替え
+    /// </summary>
+    /// <param name="isSwitch"></param>
+    public void SwitchActivation(bool isSwitch)
+    {
+        isActivate = isSwitch;
+    }
+
 }

@@ -14,12 +14,14 @@ public class GameDirector : MonoBehaviour
     [SerializeField]
     FloorGenerator[] floorGenerators;
 
+    [SerializeField]
+    RandomObjectGenerator[] randomObjectGenerators;
+
     bool isSetUp;
     bool isGameUp;
 
     //生成回数
     int generateCount;
-    public int clearCount;
 
     // generateCount 変数のプロパティ
     public int GenerateCount
@@ -45,6 +47,11 @@ public class GameDirector : MonoBehaviour
         }
     }
 
+    //ゴール生成までのカウント
+    public int clearCount;
+
+
+
 
 
 
@@ -55,11 +62,8 @@ public class GameDirector : MonoBehaviour
         isGameUp = false;
         isSetUp = false;
 
-        // FloorGeneratorの準備
         SetUpFloorGenerators();
-
-        // TODO 各ジェネレータを停止
-        Debug.Log("生成停止");
+        StopGenerators();
     }
 
     /// <summary>
@@ -70,7 +74,7 @@ public class GameDirector : MonoBehaviour
         for (int i = 0; i < floorGenerators.Length; i++)
         {
             // FloorGeneratorの準備・初期設定を行う
-            //floorGenerators[i].SetUpGenerator(this);           // <=　メソッドを追加する修正が済むまでコメントアウト
+            floorGenerators[i].SetUpGenerator(this);
         }
     }
     // Update is called once per frame
@@ -80,11 +84,9 @@ public class GameDirector : MonoBehaviour
         if (playerController.isFirstGenerateBallon && isSetUp == false)
         {
 
-            // 準備完了
+            // ゲームスタート
             isSetUp = true;
-
-            // TODO 各ジェネレータを動かし始める
-            Debug.Log("生成スタート");
+            ActivateGenerators();
         }
     }
 
@@ -108,8 +110,40 @@ public class GameDirector : MonoBehaviour
 
         // ゲーム終了
         isGameUp = true;
-
-        // TODO 各ジェネレータを停止
-        Debug.Log("生成停止");
+        StopGenerators();
     }
+
+    /// <summary>
+    /// 各ジェネレータを停止する
+    /// </summary>
+    private void StopGenerators()
+    {
+        for (int i = 0; i < randomObjectGenerators.Length; i++)
+        {
+            randomObjectGenerators[i].SwitchActivation(false);
+        }
+        for (int i = 0; i < floorGenerators.Length; i++)
+        {
+            floorGenerators[i].SwitchActivation(false);
+        }
+
+    }
+
+
+    /// <summary>
+    /// 各ジェネレータを動かし始める
+    /// </summary>
+    private void ActivateGenerators()
+    {
+        for (int i = 0; i < randomObjectGenerators.Length; i++)
+        {
+            randomObjectGenerators[i].SwitchActivation(true);
+        }
+        for (int i = 0; i < floorGenerators.Length; i++)
+        {
+            floorGenerators[i].SwitchActivation(true);
+        }
+
+    }
+
 }
