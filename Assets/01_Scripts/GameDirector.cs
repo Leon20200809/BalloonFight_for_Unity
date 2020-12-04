@@ -19,7 +19,7 @@ public class GameDirector : MonoBehaviour
 
     //生成回数
     int generateCount;
-    int clearCount;
+    public int clearCount;
 
     // generateCount 変数のプロパティ
     public int GenerateCount
