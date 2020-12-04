@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isGameOver) return;
         Move();
     }
 
@@ -154,6 +155,8 @@ public class PlayerController : MonoBehaviour
 
             // 敵の反対側にキャラを吹き飛ばす
             transform.position += direction * knockbackPower;
+
+            DestroyBallon();
         }
     }
 

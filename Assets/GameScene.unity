@@ -197,10 +197,10 @@ RectTransform:
   m_Father: {fileID: 406340971}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 387.9, y: 0}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 562, y: 0}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &11874311
 GameObject:
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   isGenerating: 0
   startChecker: {fileID: 1143162658}
   isFirstGenerateBallon: 0
-  knockbackPower: 2
+  knockbackPower: 0.5
   uIManager: {fileID: 506570500}
   coinPoint: 0
 --- !u!4 &765227977 stripped
@@ -1469,7 +1469,8 @@ MonoBehaviour:
   playerController: {fileID: 734724374}
   floorGenerators:
   - {fileID: 1299661663}
-  randomObjectGenerators: []
+  randomObjectGenerators:
+  - {fileID: 1299661662}
   clearCount: 20
 --- !u!1 &1308453704
 GameObject:
