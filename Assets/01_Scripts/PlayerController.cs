@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    const string horizontal = "Horizontal";
-    const string jump = "Jump";
+    protected const string horizontal = "Horizontal";
+    protected const string jump = "Jump";
     Rigidbody2D rb;
-    Animator anim;
+    protected Animator anim;
     public float moveSpeed;
     public float jumpPower;
     float scale;
@@ -32,7 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     StartChecker startChecker;
     public bool isFirstGenerateBallon;
-    bool isGameOver = false;
+    protected bool isGameOver = false;
+    public bool isGameStart = true;
 
     //のけぞり距離
     public float knockbackPower;
@@ -41,26 +43,37 @@ public class PlayerController : MonoBehaviour
     public UIManager uIManager;
     public int coinPoint;
 
+    //スマホ十字キー
+    [SerializeField]
+    Joystick joystick;
+
+    [SerializeField]
+    Button btnJump;
+
+    public bool in_proximity_attack_range;
+
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         InitPlayer();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (isGameOver) return;
+        if (isGameStart) return;
         Move();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
+        if (isGameOver) return;
+        if (isGameStart) return;
         LimitArea();
         Is_ground_decision_enabled();
         BallonRecaver();
         if (ballons[0] != null) Jump();
-
     }
 
 
@@ -68,7 +81,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 制限設定
     /// </summary>
-    void LimitArea()
+    protected void LimitArea()
     {
         //ジャンプパワー制限
         if (rb.velocity.y > 5.0f) rb.velocity = new Vector2(rb.velocity.x, 5.0f);
@@ -84,22 +97,33 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// キャラクター初期設定
     /// </summary>
-    void InitPlayer()
+    protected void InitPlayer()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         scale = transform.localScale.x;
         ballons = new Ballon[maxBallonCount];
+        btnJump.onClick.AddListener(JumpS);
+
     }
 
     /// <summary>
     /// キャラクター移動
     /// </summary>
-    void Move()
+    protected void Move()
     {
+#if UNITY_EDITOR
+        // 水平(横)方向への入力受付
+        float x = Input.GetAxis(horizontal);
+
+        //エディターでの動作確認終了
+        //x = joystick.Horizontal; 
+#else
+        float x = joystick.Horizontal;
+#endif
         anim.SetBool("Landing", false);
         anim.SetBool("Fall", false);
-        float x = Input.GetAxisRaw(horizontal);
+        //x = Input.GetAxisRaw(horizontal);
         if (x != 0)
         {
             rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
@@ -126,13 +150,12 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("Run", 0.0f);
             anim.SetBool("Idle", true);
         }
-
     }
 
     /// <summary>
     /// キャラクタージャンプ
     /// </summary>
-    void Jump()
+    protected void Jump()
     {
         if (Input.GetButtonDown(jump))
         {
@@ -141,9 +164,17 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    /// <summary>
+    /// キャラクタージャンプ
+    /// </summary>
+    protected void JumpS()
+    {
+         rb.AddForce(transform.up * jumpPower);
+         anim.SetTrigger("Jump");
+    }
 
     //=============   接触判定   ==================//
-    private void OnCollisionEnter2D(Collision2D col)
+    protected void OnCollisionEnter2D(Collision2D col)
     {
 
         // 接触したコライダーを持つゲームオブジェクトのTagがEnemyなら 
@@ -160,7 +191,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    protected void OnTriggerEnter2D(Collider2D col)
     {
 
         // 通過したコライダーを持つゲームオブジェクトの Tag が Coin の場合
@@ -183,7 +214,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 設置判定
     /// </summary>
-    void Is_ground_decision_enabled()
+    protected void Is_ground_decision_enabled()
     {
         // 接地判定。接地＝ true
         isGrounded = Physics2D.Linecast(transform.position + transform.up * 0.4f, transform.position - transform.up * 0.9f, groundLayer);
@@ -195,18 +226,19 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true) anim.SetBool("Landing", true);
     }
 
+    protected float timeleft;
     /// <summary>
     /// 手動バルーン生成　Qボタン入力
     /// </summary>
-    void BallonRecaver()
+    protected void BallonRecaver()
     {
         if (isGrounded == true && isGenerating == false)
         {
-
+            timeleft -= Time.deltaTime;
             // Qボタンを押したら
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (timeleft <= 0.0)
             {
-
+                timeleft = 3.0f;
                 // バルーンを１つ作成する
                 StartCoroutine(GenerateBallon());
             }
@@ -217,7 +249,7 @@ public class PlayerController : MonoBehaviour
     /// バルーン生成メソッド
     /// </summary>
     /// <returns></returns>
-    IEnumerator GenerateBallon()
+    protected IEnumerator GenerateBallon()
     {
         if (!isFirstGenerateBallon)
         {
@@ -260,11 +292,11 @@ public class PlayerController : MonoBehaviour
 
         if (ballons[1] != null)
         {
-            Destroy(ballons[1]);
+            Destroy(ballons[1].gameObject);
         }
-        else if (ballons[0] != null)
+        if (ballons[0] != null)
         {
-            Destroy(ballons[0]);
+            Destroy(ballons[0].gameObject);
         }
     }
 

@@ -34,6 +34,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     CanvasGroup canvasGroupTitle;
 
+    public PlayerController playerController;
+
     /// <summary>
     /// スコア表示更新
     /// </summary>
@@ -109,7 +111,7 @@ public class UIManager : MonoBehaviour
         });
 
         // Tap Startの文字をゆっくり点滅させる
-        lblStart.gameObject.GetComponent<CanvasGroup>().DOFade(0, 1.0f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+        lblStart.gameObject.GetComponent<CanvasGroup>().DOFade(1, 1.0f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
     }
 
     /// <summary>
@@ -147,5 +149,8 @@ public class UIManager : MonoBehaviour
 
         //タイトルグループオフ
         canvasGroupTitle.gameObject.SetActive(false);
+
+        playerController.isGameStart = false;
+        
     }
 }
