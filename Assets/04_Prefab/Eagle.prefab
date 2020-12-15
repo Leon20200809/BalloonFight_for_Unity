@@ -46,7 +46,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 1
 --- !u!1 &9118218166530449197
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 9118218166530449190}
   - component: {fileID: 9118218166530449193}
   - component: {fileID: 9118218166530449188}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eagle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -216,5 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ee316d92ecb84419a1698450f393d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 2
-  moveRange: 2
+  moveTime: 1
+  moveRange: 0.5
+  exPrefab: {fileID: 1039816552800756, guid: 09aed3367e390294bbef9228b8344f84, type: 3}

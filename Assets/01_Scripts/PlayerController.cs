@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     protected const string horizontal = "Horizontal";
     protected const string jump = "Jump";
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     protected Animator anim;
     public float moveSpeed;
     public float jumpPower;
@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Button btnJump;
 
+    //クールタイム用
+    public float timeleft;
+
     public bool in_proximity_attack_range;
 
     // Start is called before the first frame update
@@ -84,11 +87,11 @@ public class PlayerController : MonoBehaviour
     protected void LimitArea()
     {
         //ジャンプパワー制限
-        if (rb.velocity.y > 5.0f) rb.velocity = new Vector2(rb.velocity.x, 5.0f);
+        if (rb.velocity.y > 3.0f) rb.velocity = new Vector2(rb.velocity.x, 2.5f);
 
         //移動範囲制限
         float posX = Mathf.Clamp(transform.position.x, -limitPosX, limitPosX);
-        float posY = Mathf.Clamp(transform.position.y, -limitPosY, limitPosY);
+        float posY = Mathf.Clamp(transform.position.y, -limitPosY - 5, limitPosY);
 
         //位置補正
         transform.position = new Vector2(posX, posY);
@@ -226,7 +229,6 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true) anim.SetBool("Landing", true);
     }
 
-    protected float timeleft;
     /// <summary>
     /// 手動バルーン生成　Qボタン入力
     /// </summary>
@@ -238,7 +240,7 @@ public class PlayerController : MonoBehaviour
             // Qボタンを押したら
             if (timeleft <= 0.0)
             {
-                timeleft = 3.0f;
+                timeleft = 1.0f;
                 // バルーンを１つ作成する
                 StartCoroutine(GenerateBallon());
             }

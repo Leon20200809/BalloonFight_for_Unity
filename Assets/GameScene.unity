@@ -256,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59070055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2129909594}
@@ -951,7 +951,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614637669}
   m_LocalRotation: {x: -0.006370322, y: 0, z: 0, w: 0.99997973}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2129909594}
@@ -1061,7 +1061,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628607801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.44, z: 0}
+  m_LocalPosition: {x: 0, y: -5.86, z: 0}
   m_LocalScale: {x: 20, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1576,9 +1576,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objPrefab:
   - {fileID: 9118218166530449197, guid: e81e7301946321045b541887a884328a, type: 3}
+  - {fileID: 9118218166530449197, guid: e81e7301946321045b541887a884328a, type: 3}
+  - {fileID: 9118218166530449197, guid: e81e7301946321045b541887a884328a, type: 3}
   - {fileID: 1161553605790959692, guid: 3a66daf614659314ca504ca75845cf76, type: 3}
   generateTran: {fileID: 11874313}
-  waitTimeRange: {x: 3, y: 7}
+  waitTimeRange: {x: 2, y: 3}
 --- !u!114 &1299661663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2183,36 +2185,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1654207416
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1654207417}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1654207417
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654207416}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697469973
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,7 +2708,7 @@ GameObject:
   - component: {fileID: 2129909596}
   - component: {fileID: 2129909595}
   - component: {fileID: 2129909597}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Unitychan_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2879,7 +2851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04f7bafe06fff446aaa5ad4ec051f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 3
   jumpPower: 100
   isGrounded: 0
   groundLayer:
@@ -2903,10 +2875,12 @@ MonoBehaviour:
   coinPoint: 0
   joystick: {fileID: 924831270}
   btnJump: {fileID: 1574252571}
+  timeleft: 0
   in_proximity_attack_range: 0
   BulletTran: {fileID: 1098861075}
-  bulletPrefab: {fileID: 0}
-  swordPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 7800950318607934438, guid: 1eb448b442f93a44193437f984208d0f, type: 3}
+  swordPrefab: {fileID: 976106869728017298, guid: f8c0f90b6f5455d459d8c2efd0931654, type: 3}
+  timeleftA: 0
 --- !u!1001 &7714278611590336651
 PrefabInstance:
   m_ObjectHideFlags: 0

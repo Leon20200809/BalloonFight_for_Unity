@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Coin
   - in_proximity_attack_range
+  - PlayerAtk
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - 
   - Ground
   - Player
-  - 
-  - 
-  - 
+  - PlayerAtk
+  - Enemy
+  - EnemyAtk
   - 
   - 
   - 

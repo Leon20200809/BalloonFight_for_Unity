@@ -14,6 +14,10 @@ public class Player_Unitychan : PlayerController
     [SerializeField]
     Sword swordPrefab;
 
+    //クールタイム用
+    public float timeleftA;
+
+
     protected override void Update()
     {
         if (isGameOver) return;
@@ -27,30 +31,38 @@ public class Player_Unitychan : PlayerController
 
     protected void Attack()
     {
+        timeleftA -= Time.deltaTime;
+
         if (Input.GetKey(KeyCode.P) || (Input.GetMouseButtonDown(0)))
         {
-            if(in_proximity_attack_range == true)
+            if (timeleftA <= 0.0)
             {
-                //近接攻撃アニメーション
-                Debug.Log("近接攻撃");
-                anim.SetTrigger("Attack_B");
-            }
-            else
-            {
-                //遠距離攻撃アニメーション
-                Debug.Log("遠距離攻撃");
-                anim.SetTrigger("Attack_A");
+                if (in_proximity_attack_range == true)
+                {
+                    //近接攻撃アニメーション
+                    anim.SetTrigger("Attack_B");
+                    timeleftA = 1.0f;
+                }
+                else
+                {
+                    //遠距離攻撃アニメーション
+                    anim.SetTrigger("Attack_A");
+                    timeleftA = 2.0f;
+                }
+
             }
         }
     }
 
     public void GunshotAttack()
     {
-
+        rb.AddForce(transform.up * jumpPower * 0.5f);
+        Bullet b = Instantiate(bulletPrefab, BulletTran);
     }
     public void SwordAttack()
     {
-
+        rb.AddForce(transform.up * jumpPower * 0.5f);
+        Sword s = Instantiate(swordPrefab, BulletTran);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
