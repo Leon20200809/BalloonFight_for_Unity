@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     float limitPosY = 4.45f;
 
     //風船
-    public Ballon[] ballons;
+    public List<Ballon> ballons = new List<Ballon>();
+    //Ballon ballon;
     public int maxBallonCount;
     public Transform[] ballonTran;
     public Ballon ballonPrefab;
@@ -76,7 +77,7 @@ public class PlayerController : MonoBehaviour
         LimitArea();
         Is_ground_decision_enabled();
         BallonRecaver();
-        if (ballons[0] != null) Jump();
+        if (ballons.Count > 0) Jump();
     }
 
 
@@ -105,7 +106,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         scale = transform.localScale.x;
-        ballons = new Ballon[maxBallonCount];
+        //ballons = new Ballon[maxBallonCount];
         btnJump.onClick.AddListener(JumpS);
 
     }
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour
         if (x != 0)
         {
             rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
-
+            Debug.Log(rb.velocity.x);
 
             //振り向き
             Vector3 temp = transform.localScale;
@@ -183,6 +184,8 @@ public class PlayerController : MonoBehaviour
         // 接触したコライダーを持つゲームオブジェクトのTagがEnemyなら 
         if (col.gameObject.tag == "Enemy")
         {
+            anim.SetTrigger("Hurt");
+            
 
             // キャラと敵の位置から距離と方向を計算
             Vector3 direction = (transform.position - col.transform.position).normalized;
@@ -237,7 +240,6 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true && isGenerating == false)
         {
             timeleft -= Time.deltaTime;
-            // Qボタンを押したら
             if (timeleft <= 0.0)
             {
                 timeleft = 1.0f;
@@ -259,7 +261,44 @@ public class PlayerController : MonoBehaviour
             Debug.Log("ゲームスタート");
             startChecker.SetInitialSpeed();
         }
-        //風船MAX時は処理しない
+
+        //風船最大時は処理しない
+        if (maxBallonCount <= ballons.Count)
+        {
+            yield break;
+        }
+
+        //現在の風船の数と最大時の差分を出す
+        int differenceCount = maxBallonCount - ballons.Count;
+        isGenerating = true;
+        Debug.Log(differenceCount);
+        //最大時になるまで風船を作る
+        for (int i = 0; i < differenceCount; i++)
+        {
+            Ballon ballon;
+            //ballons.Add(Instantiate(ballonPrefab, ballonTran[maxBallonCount - i]));
+            if (ballonTran[0].childCount == 0)
+            {
+                ballon = Instantiate(ballonPrefab, ballonTran[0]);
+            }
+            else
+            {
+                ballon = Instantiate(ballonPrefab, ballonTran[1]);
+            }
+
+            ballon.SetUpBallon(this);
+            ballons.Add(ballon);
+
+
+            //風船生成ディレイ
+            yield return new WaitForSeconds(generateTime);
+
+        }
+
+        isGenerating = false;
+
+
+        /*//風船MAX時は処理しない
         if (ballons[1] != null)
         {
             yield break;
@@ -278,27 +317,84 @@ public class PlayerController : MonoBehaviour
         }
 
         //風船生成ディレイ
-        yield return new WaitForSeconds(generateTime);
+        yield return new WaitForSeconds(generateTime);*/
+
+    }
+
+    public void GenerateBallonEnemyDestory()
+    {
+        //風船最大時は処理しない
+        if (maxBallonCount <= ballons.Count)
+        {
+            return;
+        }
+
+        //現在の風船の数と最大時の差分を出す
+        int differenceCount = maxBallonCount - ballons.Count;
+        isGenerating = true;
+        Debug.Log(differenceCount);
+        //最大時になるまで風船を作る
+        for (int i = 0; i < differenceCount; i++)
+        {
+            Ballon ballon;
+            //ballons.Add(Instantiate(ballonPrefab, ballonTran[maxBallonCount - i]));
+            if (ballonTran[0].childCount == 0)
+            {
+                ballon = Instantiate(ballonPrefab, ballonTran[0]);
+            }
+            else
+            {
+                ballon = Instantiate(ballonPrefab, ballonTran[1]);
+            }
+
+            ballon.SetUpBallon(this);
+            ballons.Add(ballon);
+
+        }
 
         isGenerating = false;
+
     }
+
 
 
     /// <summary>
     /// バルーン破壊
     /// </summary>
-    public void DestroyBallon()
+    public void DestroyBallon(Ballon ballon)
     {
+
+        
+        if (ballons.Count == 0)
+        {
+           return;
+        }
+        else
+        {
+            ballons.Remove(ballon);
+            Destroy(ballon.gameObject);
+        }
+
 
         // TODO 後程、バルーンが破壊される際に「割れた」ように見えるアニメ演出を追加する
 
-        if (ballons[1] != null)
+        /*if (ballons[1] != null)
         {
             Destroy(ballons[1].gameObject);
         }
         if (ballons[0] != null)
         {
             Destroy(ballons[0].gameObject);
+        }*/
+    }
+
+    private void DestroyBallon()
+    {
+        if (ballons.Count > 0)
+        {
+            Ballon ballon = ballons[ballons.Count - 1];
+            ballons.Remove(ballon);
+            Destroy(ballon.gameObject);
         }
     }
 

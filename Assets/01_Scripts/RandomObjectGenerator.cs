@@ -65,7 +65,7 @@ public class RandomObjectGenerator : MonoBehaviour
         GameObject obj = Instantiate(objPrefab[randomIndex], generateTran);
 
         // ランダムな値を取得
-        float randomPosY = Random.Range(-4.0f, 4.0f);
+        float randomPosY = Random.Range(-2.0f, 4.0f);
 
         // 生成されたゲームオブジェクトのY軸にランダムな値を加算して、生成されるたびに高さの位置を変更する
         obj.transform.position = new Vector2(obj.transform.position.x, obj.transform.position.y + randomPosY);

@@ -125,6 +125,9 @@ public class UIManager : MonoBehaviour
         // タイトルを徐々に非表示
         SwitchDisplayTitle(false, 0.0f);
 
+        //BGM再生
+        SoundManager.instance.PlayBGM(SoundManager.BGM_Type.Game0);
+
         // タイトル表示が消えるのと入れ替わりで、ゲームスタートの文字を表示する
         StartCoroutine(DisplayGameStartInfo());
     }

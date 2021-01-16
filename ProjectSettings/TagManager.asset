@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - in_proximity_attack_range
   - PlayerAtk
+  - BossEnemy
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
+    [SerializeField]
+    Toko_EnemyMovement toko;
 
     [SerializeField]
     GoalChecker goalHousePrefab;
@@ -16,6 +18,8 @@ public class GameDirector : MonoBehaviour
 
     [SerializeField]
     RandomObjectGenerator[] randomObjectGenerators;
+
+
 
     bool isSetUp;
     bool isGameUp;
@@ -33,6 +37,9 @@ public class GameDirector : MonoBehaviour
 
             if (generateCount >= clearCount)
             {
+                //ボス出現
+                GenerateBoss();
+
                 // ゴール地点を生成
                 GenerateGoal();
 
@@ -100,6 +107,11 @@ public class GameDirector : MonoBehaviour
 
         // TODO ゴール地点の初期設定
         Debug.Log("ゴール地点 生成");
+    }
+
+    void GenerateBoss()
+    {
+        Toko_EnemyMovement Bosstoko = Instantiate(toko);
     }
 
     /// <summary>

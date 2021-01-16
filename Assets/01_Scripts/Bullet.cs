@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    GameObject player;
+    PlayerController player;
     Rigidbody2D rb;
     public float shotSpeed;
     public float knockbackPower;
@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         GunShot();
     }
 
@@ -33,21 +33,31 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        // 接触したコライダーを持つゲームオブジェクトのTagがEnemyなら 
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "BossEnemy")
         {
-            Debug.Log(collision);
-            Destroy(gameObject);
+            int destroyPoint = 0;
+            if (collision.gameObject.tag == "Enemy")
+            {
+                destroyPoint = collision.gameObject.GetComponent<VerticalFloatingObject>().point;
+
+            }
+            else if (collision.gameObject.tag == "BossEnemy")
+            {
+                destroyPoint = collision.gameObject.GetComponent<Toko_EnemyMovement>().point;
+
+            }
+            destroyPoint = destroyPoint - 200;
+            Debug.Log(destroyPoint);
+
+            // TODO 攻撃ポイント加算
+            player.coinPoint += destroyPoint;
+            player.uIManager.UpdateDisplayScore(player.coinPoint);
+            Debug.Log(player.coinPoint);
+
         }
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Debug.Log(collision);
-            Destroy(gameObject);
-        }
 
-    }
 }

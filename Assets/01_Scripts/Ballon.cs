@@ -29,7 +29,7 @@ public class Ballon : MonoBehaviour
         {
             tweener.Kill();
 
-            playerController.DestroyBallon();
+            playerController.DestroyBallon(this);
         }
     }
 }

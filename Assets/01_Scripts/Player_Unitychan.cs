@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player_Unitychan : PlayerController
 {
     [SerializeField]
-    Transform BulletTran;
+    Transform bulletTran;
 
     [SerializeField]
     Bullet bulletPrefab;
@@ -20,12 +20,13 @@ public class Player_Unitychan : PlayerController
 
     protected override void Update()
     {
-        if (isGameOver) return;
-        if (isGameStart) return;
-        LimitArea();
-        Is_ground_decision_enabled();
-        BallonRecaver();
-        if (ballons[0] != null) Jump();
+        //if (isGameOver) return;
+        //if (isGameStart) return;
+        //LimitArea();
+        //Is_ground_decision_enabled();
+        //BallonRecaver();
+        //if (ballons.Count > 0) Jump();
+        base.Update();
         Attack();
     }
 
@@ -41,13 +42,13 @@ public class Player_Unitychan : PlayerController
                 {
                     //近接攻撃アニメーション
                     anim.SetTrigger("Attack_B");
-                    timeleftA = 1.0f;
+                    timeleftA = 0.5f;
                 }
                 else
                 {
                     //遠距離攻撃アニメーション
                     anim.SetTrigger("Attack_A");
-                    timeleftA = 2.0f;
+                    timeleftA = 1.0f;
                 }
 
             }
@@ -57,12 +58,15 @@ public class Player_Unitychan : PlayerController
     public void GunshotAttack()
     {
         rb.AddForce(transform.up * jumpPower * 0.5f);
-        Bullet b = Instantiate(bulletPrefab, BulletTran);
+        Bullet b = Instantiate(bulletPrefab, bulletTran);
+        SoundManager.instance.PlaySE(SoundManager.SE_Type.SE_00);
     }
     public void SwordAttack()
     {
         rb.AddForce(transform.up * jumpPower * 0.5f);
-        Sword s = Instantiate(swordPrefab, BulletTran);
+        Sword s = Instantiate(swordPrefab, bulletTran);
+        SoundManager.instance.PlaySE(SoundManager.SE_Type.SE_02);
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)

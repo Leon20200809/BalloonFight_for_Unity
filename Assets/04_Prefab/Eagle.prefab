@@ -219,3 +219,5 @@ MonoBehaviour:
   moveTime: 1
   moveRange: 0.5
   exPrefab: {fileID: 1039816552800756, guid: 09aed3367e390294bbef9228b8344f84, type: 3}
+  point: 300
+  player: {fileID: 0}

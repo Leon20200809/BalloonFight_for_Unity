@@ -386,9 +386,9 @@ RectTransform:
   m_Children:
   - {fileID: 406340971}
   - {fileID: 1296616625}
-  - {fileID: 1308453705}
   - {fileID: 924831267}
   - {fileID: 454034893}
+  - {fileID: 1308453705}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -620,8 +620,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f1935569186db4a17a527c5b16567657, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -784,7 +784,7 @@ RectTransform:
   - {fileID: 1574252574}
   - {fileID: 234585286}
   m_Father: {fileID: 165510821}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1271,7 +1271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aerialFloorPrefab: {fileID: 5119094508509760951, guid: 7e407938898af11459b58dd89e3a8c58, type: 3}
   generateTran: {fileID: 11874313}
-  waitTime: 6
+  waitTime: 10
 --- !u!4 &1299661664
 Transform:
   m_ObjectHideFlags: 0
@@ -1622,13 +1622,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3be7c98a65e4e40a7d5453e9cfaa12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toko: {fileID: 8342725958952822423, guid: 1ac4bb3e017936a45b377d2d3b88354e, type: 3}
   goalHousePrefab: {fileID: 199350939493320989, guid: 54e6e09adbe6acd45aff454aac04259c, type: 3}
   playerController: {fileID: 2129909597}
   floorGenerators:
   - {fileID: 1299661663}
   randomObjectGenerators:
   - {fileID: 1299661662}
-  clearCount: 20
+  clearCount: 8
 --- !u!1 &1308453704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1659,7 @@ RectTransform:
   m_Children:
   - {fileID: 2028701988}
   m_Father: {fileID: 165510821}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1715,7 +1716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.3679245, g: 0.3538972, b: 0.31412423, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1729,7 +1730,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2081,8 +2082,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -6513711549821746433, guid: 37426dfe5cfb14626a6e1c60f8d927eb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2218,9 +2219,22 @@ MonoBehaviour:
   SE_Volume: 0.2
   VOICE_Volume: 0.2
   Mute: 0
-  BGM_Clips: []
-  SE_Clips: []
-  VOICE_Clips: []
+  BGM_Clips:
+  - {fileID: 8300000, guid: 6b140e3609113e04a92f4766d191aca8, type: 3}
+  - {fileID: 0}
+  SE_Clips:
+  - {fileID: 8300000, guid: 691eb3f0d39a1a34389638d91395e295, type: 3}
+  - {fileID: 8300000, guid: ff9c5002fed9b044192de237e5e3d597, type: 3}
+  - {fileID: 8300000, guid: 1ac2545944a2f174ba3aa37602db4f7a, type: 3}
+  - {fileID: 8300000, guid: 49742b9ef9f443f4697a8983927f2709, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  VOICE_Clips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   audioMixer: {fileID: 0}
   esc_Menu_Prefab: {fileID: 0}
   canvasTran: {fileID: 0}
@@ -2354,7 +2368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.3962264, g: 0.37674746, b: 0.3233357, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2368,7 +2382,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2857,9 +2871,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  ballons:
-  - {fileID: 0}
-  - {fileID: 0}
+  ballons: []
   maxBallonCount: 2
   ballonTran:
   - {fileID: 59070056}
@@ -2870,14 +2882,14 @@ MonoBehaviour:
   startChecker: {fileID: 1143162658}
   isFirstGenerateBallon: 0
   isGameStart: 1
-  knockbackPower: 1
+  knockbackPower: 2
   uIManager: {fileID: 506570500}
   coinPoint: 0
   joystick: {fileID: 924831270}
   btnJump: {fileID: 1574252571}
   timeleft: 0
   in_proximity_attack_range: 0
-  BulletTran: {fileID: 1098861075}
+  bulletTran: {fileID: 1098861075}
   bulletPrefab: {fileID: 7800950318607934438, guid: 1eb448b442f93a44193437f984208d0f, type: 3}
   swordPrefab: {fileID: 976106869728017298, guid: f8c0f90b6f5455d459d8c2efd0931654, type: 3}
   timeleftA: 0
@@ -2890,7 +2902,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7714278611183161752, guid: 7753fc7587610ed46b1e38175cd34434, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.65
+      value: -8.55
       objectReference: {fileID: 0}
     - target: {fileID: 7714278611183161752, guid: 7753fc7587610ed46b1e38175cd34434, type: 3}
       propertyPath: m_LocalPosition.y

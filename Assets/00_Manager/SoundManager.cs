@@ -32,26 +32,12 @@ public class SoundManager : MonoBehaviour
     //SE管理
     public enum SE_Type
     {
-        //SE列挙子を登録
-        KatanaFuri,
-        KatanaHit,
-        KatanaIai,
-        KatanaTuki,
-        Kick,
-        Parry,
-        ParryS,
-        E_HvAtk,
-        MagicBall,
-        WhipAtk,
-        SusSAtk,
-        SusSAtkReady,
-        BowAtk,
-        Dash,
-        SE_14,
-        SE_15,
-        SE_16,
-        SE_17,
-        SE_18,
+       
+        SE_00,
+        SE_01,
+        SE_02,
+        SE_03,
+        SE_04,
 
     }
 
