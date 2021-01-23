@@ -13,6 +13,7 @@ public class Toko_EnemyMovement : MonoBehaviour
 
     Animator animator;
     public GameObject exPrefab;
+    GameDirector gameDirector;
     public float timeleft;
     public float atkTime;
     public int atkType;
@@ -27,6 +28,7 @@ public class Toko_EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameDirector = GameObject.FindWithTag("GameManager").GetComponent<GameDirector>();
         animator = GetComponent<Animator>();
         doPath = transform.DOPath(path, duration, PathType.CatmullRom).SetOptions(true).SetLoops(-1);
     }
@@ -50,6 +52,17 @@ public class Toko_EnemyMovement : MonoBehaviour
     {
         animator.SetTrigger("Attack_B");
     }
+    public void Attack_A_Action()
+    {
+        //攻撃生成
+        Debug.Log("攻撃A");
+    }
+
+    public void Attack_B_Action()
+    {
+        //攻撃生成
+        Debug.Log("攻撃B");
+    }
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -66,9 +79,11 @@ public class Toko_EnemyMovement : MonoBehaviour
 
             if (hp <= 0)
             {
+                gameDirector.GenerateGoal();
                 doPath.Kill(true);
                 transform.DOMoveY(transform.position.y - 15, 2).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
                 Destroy(this.gameObject, 3f);
+
 
             }
         }

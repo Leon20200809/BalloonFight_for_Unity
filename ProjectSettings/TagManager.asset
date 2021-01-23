@@ -10,6 +10,7 @@ TagManager:
   - in_proximity_attack_range
   - PlayerAtk
   - BossEnemy
+  - GameManager
   layers:
   - Default
   - TransparentFX

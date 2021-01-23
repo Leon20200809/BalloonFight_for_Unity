@@ -128,10 +128,9 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Landing", false);
         anim.SetBool("Fall", false);
         //x = Input.GetAxisRaw(horizontal);
-        if (x != 0)
+        if (Mathf.Abs(x) > 0.1) //if (x != 0)
         {
             rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
-            Debug.Log(rb.velocity.x);
 
             //振り向き
             Vector3 temp = transform.localScale;

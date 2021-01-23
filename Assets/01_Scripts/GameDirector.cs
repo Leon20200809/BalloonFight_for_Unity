@@ -40,9 +40,6 @@ public class GameDirector : MonoBehaviour
                 //ボス出現
                 GenerateBoss();
 
-                // ゴール地点を生成
-                GenerateGoal();
-
                 // ゲーム終了
                 GameUp();
             }
@@ -100,7 +97,7 @@ public class GameDirector : MonoBehaviour
     /// <summary>
     /// ゴール地点の生成
     /// </summary>
-    private void GenerateGoal()
+    public void GenerateGoal()
     {
         // ゴール地点を生成
         GoalChecker goalHouse = Instantiate(goalHousePrefab);
